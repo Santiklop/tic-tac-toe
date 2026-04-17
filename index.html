@@ -439,7 +439,10 @@
       pointer-events: none;
       z-index: 1002;
       transform: translateX(-50%);
-      white-space: nowrap;
+      max-width: 80vw;
+      text-align: center;
+      word-break: break-word;
+      line-height: 1.25;
       letter-spacing: 1px;
       animation: hitNameAnim 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
     }
@@ -647,7 +650,14 @@
     @keyframes legSwingBack { 0%{transform:rotate(30deg)}  50%{transform:rotate(-30deg)} 100%{transform:rotate(30deg)} }
     .rm-leg-l { animation: legSwingFwd  0.28s linear infinite; }
     .rm-leg-r { animation: legSwingBack 0.28s linear infinite; }
-    @keyframes rmBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+    @keyframes rmBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+    @keyframes rmJump {
+      0%                { bottom: 120px; animation-timing-function: ease-out; }
+      11%               { bottom: 240px; animation-timing-function: ease-in; }
+      22%               { bottom: 112px; animation-timing-function: ease-out; }
+      28%, 100%         { bottom: 120px; }
+    }
+    #runaway-mole { animation: rmJump 3.2s ease-in-out infinite; }
     @keyframes kickFlyRight {
       0%   { transform: translateX(0)    translateY(0)    rotate(0deg)   scale(1);   opacity: 1; }
       20%  { transform: translateX(30px) translateY(-60px) rotate(45deg)  scale(1.1); opacity: 1; }
@@ -852,7 +862,8 @@
       const el = document.createElement('div');
       el.className = 'hit-name';
       el.textContent = playerIdx === -1 ? 'Попался, пидорок!' : PLAYER_NAMES[playerIdx] + ' получил пизды!';
-      el.style.left = x + 'px';
+      const cx = Math.max(window.innerWidth * 0.2, Math.min(window.innerWidth * 0.8, x));
+      el.style.left = cx + 'px';
       el.style.top  = (y - 90) + 'px';
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 1850);
@@ -948,9 +959,9 @@
       rmEl.style.left = startX + 'px';
       rmEl.style.display = 'block';
       rmEl.getBoundingClientRect(); // force reflow
-      rmEl.style.transition = 'left 3.5s linear';
+      rmEl.style.transition = 'left 5.5s linear';
       rmEl.style.left = endX + 'px';
-      rmEl._autoDismiss = setTimeout(dismissRunaway, 3600);
+      rmEl._autoDismiss = setTimeout(dismissRunaway, 5700);
     }
 
     function dismissRunaway() {
