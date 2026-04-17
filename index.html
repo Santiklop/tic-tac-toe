@@ -191,30 +191,29 @@
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      background: radial-gradient(ellipse at 50% 62%, #06101a 0%, #040c12 55%, #020608 100%);
+      background: radial-gradient(ellipse at 50% 65%, #150c05 0%, #0c0704 55%, #060402 100%);
       box-shadow:
-        inset 0 14px 36px rgba(0,0,0,0.98),
-        inset 0 -6px 20px rgba(80,180,255,0.07),
-        0 0 0 9px #1c2d3e,
-        0 0 0 17px #13202c,
-        0 0 0 24px rgba(80,180,255,0.09),
-        0 0 0 30px rgba(0,0,0,0.22),
-        0 5px 22px rgba(0,0,0,0.7);
+        inset 0 12px 32px rgba(0,0,0,0.97),
+        inset 0 -4px 12px rgba(120,70,20,0.12),
+        0 0 0 5px #5c3a18,
+        0 0 0 10px #4a2d10,
+        0 0 0 14px rgba(45,20,5,0.35),
+        0 4px 14px rgba(0,0,0,0.55);
       z-index: 1;
       pointer-events: none;
     }
 
-    /* Stone rim — dark slate gradient over mole's lower body, z-index above mole */
+    /* Dirt rim — brown gradient over mole's lower body, z-index above mole */
     .hole-rim {
       position: absolute;
       inset: 0;
       border-radius: 50%;
       background: radial-gradient(
-        ellipse at 50% 94%,
-        #1c2d3e 0%,
-        #13202c 20%,
-        rgba(14,22,32,0.7) 40%,
-        transparent 58%
+        ellipse at 50% 95%,
+        #5c3a18 0%,
+        #4a2d10 22%,
+        rgba(50,28,8,0.65) 40%,
+        transparent 55%
       );
       z-index: 3;
       pointer-events: none;
@@ -241,7 +240,7 @@
       width: 134px;
       height: 126px;
       border-radius: 50% 50% 46% 46% / 54% 54% 46% 46%;
-      background: radial-gradient(ellipse at 42% 32%, #8fa8c0 0%, #5c7a94 36%, #344d62 72%, #1c2d3c 100%);
+      background: radial-gradient(ellipse at 42% 32%, #9e6e3a 0%, #7a4e28 38%, #4d2e12 75%, #2d1808 100%);
       position: relative;
       display: flex;
       flex-direction: column;
@@ -250,7 +249,7 @@
       padding-top: 5px;
       box-shadow:
         inset 0 -14px 26px rgba(0,0,0,0.55),
-        inset 3px 3px 12px rgba(160,210,255,0.2),
+        inset 3px 3px 12px rgba(200,140,70,0.25),
         inset -3px -3px 12px rgba(0,0,0,0.35),
         0 5px 16px rgba(0,0,0,0.65);
     }
@@ -262,10 +261,10 @@
       position: absolute;
       width: 26px;
       height: 30px;
-      background: radial-gradient(ellipse at 50% 38%, #5c7a94 0%, #344d62 55%, #1c2d3c 100%);
+      background: radial-gradient(ellipse at 50% 38%, #7a4e28 0%, #4d2e12 55%, #2d1808 100%);
       border-radius: 50% 50% 44% 44%;
       top: -16px;
-      box-shadow: inset 0 3px 6px rgba(160,210,255,0.15), 0 2px 5px rgba(0,0,0,0.4);
+      box-shadow: inset 0 3px 6px rgba(200,140,70,0.2), 0 2px 5px rgba(0,0,0,0.4);
     }
     .mole-head::before { left: 18px; transform: rotate(-10deg); }
     .mole-head::after  { right: 18px; transform: rotate(10deg); }
@@ -289,10 +288,10 @@
       height: 112px;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid rgba(120,200,255,0.75);
+      border: 3px solid #7a4e28;
       position: relative;
       z-index: 1;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.6), 0 0 14px rgba(80,180,255,0.35), inset 0 0 0 1px rgba(255,255,255,0.12);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.1);
       flex-shrink: 0;
     }
     .mole-face img {
@@ -338,7 +337,7 @@
     .paw {
       width: 40px;
       height: 20px;
-      background: radial-gradient(ellipse at 50% 38%, #6a8aa0, #344d62);
+      background: radial-gradient(ellipse at 50% 38%, #9e6e3a, #5a3418);
       border-radius: 42% 42% 50% 50%;
       position: relative;
       box-shadow: 0 3px 6px rgba(0,0,0,0.45);
@@ -368,13 +367,12 @@
       }
       100% {
         box-shadow:
-          inset 0 14px 36px rgba(0,0,0,0.98),
-          inset 0 -6px 20px rgba(80,180,255,0.07),
-          0 0 0 9px #1c2d3e,
-          0 0 0 17px #13202c,
-          0 0 0 24px rgba(80,180,255,0.09),
-          0 0 0 30px rgba(0,0,0,0.22),
-          0 5px 22px rgba(0,0,0,0.7);
+          inset 0 12px 32px rgba(0,0,0,0.97),
+          inset 0 -4px 12px rgba(120,70,20,0.12),
+          0 0 0 5px #5c3a18,
+          0 0 0 10px #4a2d10,
+          0 0 0 14px rgba(45,20,5,0.35),
+          0 4px 14px rgba(0,0,0,0.55);
       }
     }
     .hole.hit .hole-bg { animation: hitflash 0.35s ease-out forwards; }
