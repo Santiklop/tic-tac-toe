@@ -168,7 +168,7 @@
     #grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 30px;
       padding: 16px;
       cursor: none;
     }
@@ -180,8 +180,17 @@
       height: 145px;
       border-radius: 50%;
       position: relative;
-      overflow: hidden;
       user-select: none;
+      /* Allow mole to rise above rim; clip only below hole bottom */
+      clip-path: inset(-1000px -600px -32px -600px);
+    }
+    .hole.up { z-index: 10; }
+
+    /* Dark pit — visual circle with dirt rings */
+    .hole-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
       background: radial-gradient(ellipse at 50% 65%, #150c05 0%, #0c0704 55%, #060402 100%);
       box-shadow:
         inset 0 12px 32px rgba(0,0,0,0.97),
@@ -190,7 +199,24 @@
         0 0 0 18px #4a2d10,
         0 0 0 26px rgba(45,20,5,0.45),
         0 6px 20px rgba(0,0,0,0.55);
-      transition: box-shadow 0.15s;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Dirt rim — brown gradient over mole's lower body, z-index above mole */
+    .hole-rim {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(
+        ellipse at 50% 95%,
+        #5c3a18 0%,
+        #4a2d10 22%,
+        rgba(50,28,8,0.65) 40%,
+        transparent 55%
+      );
+      z-index: 3;
+      pointer-events: none;
     }
 
     /* ── Mole container ── */
@@ -198,20 +224,21 @@
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translateX(-50%) translateY(115%);
-      width: 132px;
+      transform: translateX(-50%) translateY(150%);
+      width: 150px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.14s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition: transform 0.16s cubic-bezier(0.22, 0.61, 0.36, 1);
       pointer-events: none;
+      z-index: 2;
     }
-    .hole.up .mole { transform: translateX(-50%) translateY(3%); }
+    .hole.up .mole { transform: translateX(-50%) translateY(-28%); }
 
     /* ── Mole head ── */
     .mole-head {
-      width: 118px;
-      height: 112px;
+      width: 134px;
+      height: 126px;
       border-radius: 50% 50% 46% 46% / 54% 54% 46% 46%;
       background: radial-gradient(ellipse at 42% 32%, #9e6e3a 0%, #7a4e28 38%, #4d2e12 75%, #2d1808 100%);
       position: relative;
@@ -239,8 +266,8 @@
       top: -16px;
       box-shadow: inset 0 3px 6px rgba(200,140,70,0.2), 0 2px 5px rgba(0,0,0,0.4);
     }
-    .mole-head::before { left: 14px; transform: rotate(-10deg); }
-    .mole-head::after  { right: 14px; transform: rotate(10deg); }
+    .mole-head::before { left: 18px; transform: rotate(-10deg); }
+    .mole-head::after  { right: 18px; transform: rotate(10deg); }
 
     /* Pink inner ear */
     .ear-inner {
@@ -252,13 +279,13 @@
       top: -11px;
       z-index: 1;
     }
-    .ear-inner.left  { left: 23px; }
-    .ear-inner.right { right: 23px; }
+    .ear-inner.left  { left: 27px; }
+    .ear-inner.right { right: 27px; }
 
     /* ── Face photo ── */
     .mole-face {
-      width: 95px;
-      height: 95px;
+      width: 112px;
+      height: 112px;
       border-radius: 50%;
       overflow: hidden;
       border: 3px solid #7a4e28;
@@ -303,13 +330,13 @@
     .mole-paws {
       display: flex;
       justify-content: space-between;
-      width: 124px;
+      width: 142px;
       margin-top: -5px;
       padding: 0 4px;
     }
     .paw {
-      width: 34px;
-      height: 18px;
+      width: 40px;
+      height: 20px;
       background: radial-gradient(ellipse at 50% 38%, #9e6e3a, #5a3418);
       border-radius: 42% 42% 50% 50%;
       position: relative;
@@ -348,13 +375,13 @@
           0 6px 20px rgba(0,0,0,0.55);
       }
     }
-    .hole.hit { animation: hitflash 0.35s ease-out forwards; }
+    .hole.hit .hole-bg { animation: hitflash 0.35s ease-out forwards; }
 
     /* ── Bonk squash ── */
     @keyframes bonk {
-      0%   { transform: translateX(-50%) translateY(3%) scaleY(1) scaleX(1); }
-      30%  { transform: translateX(-50%) translateY(16%) scaleY(0.6) scaleX(1.25); }
-      100% { transform: translateX(-50%) translateY(115%); }
+      0%   { transform: translateX(-50%) translateY(-28%) scaleY(1) scaleX(1); }
+      30%  { transform: translateX(-50%) translateY(-10%) scaleY(0.65) scaleX(1.2); }
+      100% { transform: translateX(-50%) translateY(150%); }
     }
     .hole.bonking .mole { animation: bonk 0.22s ease-out forwards; }
 
@@ -548,14 +575,14 @@
 
     /* ── Responsive ── */
     @media (max-width: 480px) {
-      .hole { width: 112px; height: 112px; }
-      .mole { width: 102px; }
-      .mole-head { width: 90px; height: 86px; }
-      .mole-face { width: 74px; height: 74px; }
-      .mole-snout { width: 26px; height: 15px; }
-      .mole-paws { width: 94px; }
-      .paw { width: 26px; height: 15px; }
-      #grid { gap: 14px; padding: 10px; }
+      .hole { width: 100px; height: 100px; }
+      .mole { width: 106px; }
+      .mole-head { width: 96px; height: 90px; }
+      .mole-face { width: 80px; height: 80px; }
+      .mole-snout { width: 24px; height: 14px; }
+      .mole-paws { width: 100px; }
+      .paw { width: 28px; height: 15px; }
+      #grid { gap: 18px; padding: 10px; }
     }
   </style>
 </head>
@@ -746,7 +773,7 @@
       el.className = 'hit-name';
       el.textContent = PLAYER_NAMES[playerIdx] + ' получил пизды!';
       el.style.left = x + 'px';
-      el.style.top  = (y + 20) + 'px';
+      el.style.top  = (y - 90) + 'px';
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 1850);
     }
@@ -867,6 +894,10 @@
         const hole = document.createElement('div');
         hole.className = 'hole';
 
+        const holeBg = document.createElement('div');
+        holeBg.className = 'hole-bg';
+        hole.appendChild(holeBg);
+
         const mole = document.createElement('div');
         mole.className = 'mole';
 
@@ -901,6 +932,11 @@
         mole.appendChild(head);
         mole.appendChild(paws);
         hole.appendChild(mole);
+
+        const holeRim = document.createElement('div');
+        holeRim.className = 'hole-rim';
+        hole.appendChild(holeRim);
+
         gridEl.appendChild(hole);
         holes.push(hole);
 
